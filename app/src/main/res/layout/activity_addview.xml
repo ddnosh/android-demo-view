@@ -36,4 +36,11 @@
         android:textAllCaps="false"
         android:text="addView(View child, LayoutParams params) with RelativeLayout"/>
 
+    <Button
+        android:id="@+id/btn_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="addView(View child, int index)"/>
+
 </LinearLayout>

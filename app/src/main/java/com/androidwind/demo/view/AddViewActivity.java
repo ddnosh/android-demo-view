@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class AddViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout root;
-    private Button btn1, btn2, btn3, btn4;
+    private Button btn1, btn2, btn3, btn4, btn5;
     private TextView tv2;
 
     @Override
@@ -34,6 +34,8 @@ public class AddViewActivity extends AppCompatActivity implements View.OnClickLi
         btn3.setOnClickListener(this);
         btn4 = findViewById(R.id.btn_4);
         btn4.setOnClickListener(this);
+        btn5 = findViewById(R.id.btn_5);
+        btn5.setOnClickListener(this);
     }
 
     @Override
@@ -82,6 +84,14 @@ public class AddViewActivity extends AppCompatActivity implements View.OnClickLi
                 param1.addRule(RelativeLayout.BELOW, 1);//此控件在id为1的控件的下边
                 rl.addView(temp2, param1);
                 root.addView(rl);
+                break;
+            case R.id.btn_5:
+                TextView child = new TextView(this);
+                child.setTextSize(20);
+                child.setTextColor(getResources().getColor(R.color.colorAccent));
+                child.setText(System.currentTimeMillis() + "");
+                System.out.println("the root has sub views count = " + root.getChildCount());
+                root.addView(child, 1);
                 break;
         }
     }
