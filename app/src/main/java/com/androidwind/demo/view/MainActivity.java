@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams
                 (FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.TOP | Gravity.CENTER;
-        Button bottom = new Button(this);
+        final Button bottom = new Button(this);
         bottom.setGravity(Gravity.CENTER);
         bottom.setAllCaps(false);
         bottom.setText("created by addContentView, click to create by setContentView");
@@ -58,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
         });
         //添加控件
         addContentView(bottom, params);
+        //requestLayout -> measure, layout, draw -> onGlobalLayout
+        System.out.println("bottom width = " + bottom.getWidth());
+        ViewTreeObserver vto2 = bottom.getViewTreeObserver();
+        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                System.out.println("after onGlobalLayout -> bottom width = " + bottom.getWidth());
+                bottom.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
     }
 
     public void ReplaceByAddContentView(View view) {
